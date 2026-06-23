@@ -1,4 +1,4 @@
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     @csrf
     @if($method == 'edit')
     <div class="form-group">
@@ -46,6 +46,28 @@
             <optio @if($selected == 'Umum') selected @endif>Umum</option>
             <optio @if($selected == 'ATK') selected @endif>ATK</option>
         </select>
+    </div>
+
+   <label>Kategori Item</label>
+
+<select name="kategori_id" class="form-control">
+    <option value="">-- Pilih Kategori --</option>
+
+    @foreach ($kategoriItems as $kategori)
+        <option value="{{ $kategori->id }}"
+            {{ $item->kategori_id == $kategori->id ? 'selected' : '' }}>
+            {{ $kategori->kode }} - {{ $kategori->nama }}
+        </option>
+    @endforeach
+</select>
+
+    <div class="form-group">
+        <label>Foto</label>
+        <input type="file" class="form-control" name="foto" value="{{ $item->foto ?? '' }}" {{ $method == 'new' ? 'required' : ''  }}>
+
+        @if($method == 'edit' && $item->foto)
+            <img src="{{ asset('uploads/master_items') }}/{{ $item->foto }}" alt="Foto" class="mb-4 mt-2" width="100">
+        @endif
     </div>
 
     <button class="btn btn-primary mt-3">Submit</button>

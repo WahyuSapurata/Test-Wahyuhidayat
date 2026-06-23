@@ -21,7 +21,7 @@
     })
 
     function getData(){
-        
+
         $('#loading-filter').show();
         var dataTableObj = $('#table').DataTable();
         var filter_kode = $('#filter-kode').val()
@@ -47,12 +47,22 @@
 
                     var html = `<a href="{{url('master-items/view/')}}/` + kode + `" class="btn btn-primary">View</a>`
 
+                    // Foto
+    var foto = '-';
+    if (item.foto) {
+        foto = `<img src="{{ asset('uploads/master_items') }}/${item.foto}"
+                     width="80"
+                     height="80"
+                     style="object-fit: cover;">`;
+    }
+
                     $.each(item, function(obj_name, obj_value) {
                         if (obj_name == 'laba') return false;
                         array_temp.push(obj_value)
                     })
                     array_temp.push(harga_jual)
                     array_temp.push(item.supplier)
+                    array_temp.push(foto);
                     array_temp.push(html)
 
 

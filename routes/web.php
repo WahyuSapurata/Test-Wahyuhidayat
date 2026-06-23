@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MasterItemsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,5 +30,18 @@ Route::post('/master-items/form/{method}/{id?}', [App\Http\Controllers\MasterIte
 Route::get('/master-items/view/{kode}', [App\Http\Controllers\MasterItemsController::class, 'singleView']);
 Route::get('/master-items/delete/{id}', [App\Http\Controllers\MasterItemsController::class, 'delete']);
 
-
 Route::get('/master-items/update-random-data', [App\Http\Controllers\MasterItemsController::class, 'updateRandomData']);
+
+Route::get('/kategori-items', [App\Http\Controllers\KategoriItems::class, 'index']);
+Route::get('/kategori-items/search', [App\Http\Controllers\KategoriItems::class, 'search']);
+Route::get('/kategori-items/form/{method}/{id?}', [App\Http\Controllers\KategoriItems::class, 'formView']);
+Route::post('/kategori-items/form/{method}/{id?}', [App\Http\Controllers\KategoriItems::class, 'formSubmit']);
+
+Route::get('/kategori-items/view/{kode}', [App\Http\Controllers\KategoriItems::class, 'singleView']);
+Route::get('/kategori-items/delete/{id}', [App\Http\Controllers\KategoriItems::class, 'delete']);
+
+Route::get('/kategori-items/update-random-data', [App\Http\Controllers\KategoriItems::class, 'updateRandomData']);
+
+Route::get('kategori-items/print/{kode}', [App\Http\Controllers\KategoriItems::class, 'printPdf']);
+
+Route::get('master-items/export', [MasterItemsController::class, 'exportExcel']);
